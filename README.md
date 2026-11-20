@@ -17,6 +17,23 @@ Subagent routing rules for the OpenAI Codex CLI: send each subagent task to the 
 
 Read-only roles (`scout`, `reader`, `extractor`, `reviewer-lite`, `reviewer`) run with `sandbox_mode = "read-only"`.
 
+## Main session: gpt-6.2-sol medium (recommended)
+
+The main session plans, writes briefs, does Easy edits, reads diffs and runs final checks; hard work goes to subagents. It also re-sends the whole conversation every turn, so its per-turn cost and speed matter more than its peak score.
+
+| Variant | Intelligence | Terminal-Bench | AutomationBench | Hallucination | Cost / task | Time / task | Tokens / s |
+|---|---|---|---|---|---|---|---|
+| gpt-6.2-sol low | 40.6 | 0.379 | 0.632 | 0.658 | $0.18 | 92 s | 65 |
+| **gpt-6.2-sol medium** | **52.7** | **0.561** | **0.703** | **0.611** | **$0.41** | **198 s** | **69** |
+| gpt-6.2-sol high | 54.9 | 0.586 | 0.699 | 0.600 | $0.56 | 280 s | 72 |
+| gpt-6.2-astra medium | 57.0 | 0.586 | 0.728 | 0.541 | $1.62 | 272 s | 48 |
+
+- **vs sol low:** low drops Intelligence by 12 points and Terminal-Bench from 0.561 to 0.379, too weak to judge diffs and briefs, to save $0.22 per task.
+- **vs sol high:** high adds +2.2 Intelligence and +0.025 Terminal-Bench for +39% cost and +41% time per task, paid on every main turn. Tool-workflow skill (AutomationBench) is the same (0.699 vs 0.703).
+- **vs astra medium:** +4.3 Intelligence and +0.025 Terminal-Bench for about 4x the cost, 37% more time and 30% slower output. The routing already sends hard work to sol xhigh and astra, so the main session does not need astra's ceiling.
+- **Caveat:** sol medium's hallucination rate (0.611) is higher than astra's (0.541). The main session should confirm facts with tools, tests or diffs rather than memory, and send text extraction to `reader` (terra high, 0.370).
+- Switch the main session up only for a single turn that needs it (for example a design decision you will not delegate); switch back after.
+
 ## Why these models
 
 From Artificial Analysis (Intelligence Index v4.3.2, 2026-11-19); raw numbers in `routing/gpt_rows.json`.
