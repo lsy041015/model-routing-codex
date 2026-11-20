@@ -9,9 +9,10 @@ Subagent routing rules for the OpenAI Codex CLI: send each subagent task to the 
 | Facts found via mail, chat, drive or many web pages | `extractor` | gpt-6.2-sol / medium |
 | Scoped bug fix or feature (2-5 files, tests) | `implementer` | gpt-6.2-sol / high |
 | Standard code review | `reviewer-lite` | gpt-6.2-sol / high |
-| Hard debugging, concurrency, cross-module, UI, no tests | `implementer-hard` | gpt-6.2-astra / high |
-| Hard review or audit | `reviewer` | gpt-6.2-astra / high |
-| Architecture, major refactor or migration; security, data loss, production or hardware control, release review | `architect` | gpt-6.2-astra / xhigh |
+| Hard debugging, concurrency, cross-module, UI, no tests; architecture, major refactor or migration; security, data loss, production or hardware control, release review | `implementer-hard` | gpt-6.2-sol / xhigh |
+| Hard, architecture or critical review or audit | `reviewer` | gpt-6.2-sol / xhigh |
+| Hard task after sol xhigh failed twice | `astra-hard` | gpt-6.2-astra / high |
+| Architecture or critical task after sol xhigh failed twice | `architect` | gpt-6.2-astra / xhigh |
 | Easy 1-2 file changes | main session | your main model |
 
 Read-only roles (`scout`, `reader`, `extractor`, `reviewer-lite`, `reviewer`) run with `sandbox_mode = "read-only"`.
@@ -26,12 +27,13 @@ From Artificial Analysis (Intelligence Index v4.3.2, 2026-11-19); raw numbers in
 | gpt-6.1-terra high | 42.4 | 0.419 | 0.370 | $0.26 | 267 s |
 | gpt-6.2-sol medium | 52.7 | 0.561 | 0.611 | $0.41 | 198 s |
 | gpt-6.2-sol high | 54.9 | 0.586 | 0.600 | $0.56 | 280 s |
+| gpt-6.2-sol xhigh | 55.7 | 0.561 | 0.562 | $0.65 | 323 s |
 | gpt-6.2-astra high | 60.1 | 0.601 | 0.581 | $2.07 | 366 s |
 | gpt-6.2-astra xhigh | 61.6 | 0.641 | 0.577 | $2.52 | 449 s |
 
 - terra high has the lowest hallucination rate of all variants: used for text extraction only.
 - sol medium has the best tool-workflow value (AutomationBench 0.70): used for mail/chat/drive extraction.
-- sol xhigh scores lower on Terminal-Bench than sol high (0.561 vs 0.586) and costs more: not used.
+- Hard and up start on sol xhigh, about a quarter of astra's cost; astra is kept as the escalation after sol xhigh fails twice on the same task (two fix rounds still missing the criteria).
 - astra max equals astra xhigh on Terminal-Bench (0.641) for +59% cost and +85% time; `ultra` has no AA data. Use `max`/`ultra` only when the user names them.
 - Dominated on every axis, never routed to: `gpt-6.1-sol`, `gpt-6-sol`, `gpt-6-astra`, all `gpt-5.6-*`, `gpt-6-luna` high and up.
 
