@@ -13,7 +13,7 @@ Subagent routing rules for the OpenAI Codex CLI: send each subagent task to the 
 | Hard, architecture or critical review or audit | `reviewer` | gpt-6.2-sol / xhigh |
 | Hard task after sol xhigh failed twice | `astra-hard` | gpt-6.2-astra / high |
 | Architecture or critical task after sol xhigh failed twice | `architect` | gpt-6.2-astra / xhigh |
-| Easy 1-2 file changes | main session | your main model |
+| Easy 1-2 file changes, planning, integration, final checks | main session | gpt-6.2-sol / medium |
 
 Read-only roles (`scout`, `reader`, `extractor`, `reviewer-lite`, `reviewer`) run with `sandbox_mode = "read-only"`.
 
@@ -46,6 +46,7 @@ Needs a Codex CLI with the `multi_agent` feature (tested on codex-cli 0.167.0).
 ```bash
 git clone https://github.com/lsy041015/model-routing-codex
 cd model-routing-codex
+# main session: set model = "gpt-6.2-sol" and model_reasoning_effort = "medium" at the top of ~/.codex/config.toml
 mkdir -p ~/.codex/agents
 cp agents/*.toml ~/.codex/agents/
 cat config.agents.toml >> ~/.codex/config.toml

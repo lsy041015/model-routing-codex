@@ -14,8 +14,8 @@ Difficulty, hardest signal wins:
 | Read-only lookup: files, symbols, call sites, config, logs | `scout` terra/low | `scout` terra/low (thin: rerun on `reader`) | needs a correctness judgment: review row | - | - |
 | Facts from text at hand (files, logs, pasted docs, one URL) | `reader` terra/high | `reader` terra/high | `reader` gathers, main synthesizes | - | - |
 | Facts via mail, Slack, Drive or many web pages | `extractor` sol/medium | `extractor` sol/medium | `extractor` gathers, main synthesizes | - | - |
-| Code change: feature, fix, refactor, tests, UI | main session | `implementer` sol/high | `implementer-hard` sol/xhigh | `implementer-hard` sol/xhigh | `implementer-hard` sol/xhigh |
-| Review, bug hunt or audit, no edits | main session | `reviewer-lite` sol/high | `reviewer` sol/xhigh | `reviewer` sol/xhigh | `reviewer` sol/xhigh |
+| Code change: feature, fix, refactor, tests, UI | main session sol/medium | `implementer` sol/high | `implementer-hard` sol/xhigh | `implementer-hard` sol/xhigh | `implementer-hard` sol/xhigh |
+| Review, bug hunt or audit, no edits | main session sol/medium | `reviewer-lite` sol/high | `reviewer` sol/xhigh | `reviewer` sol/xhigh | `reviewer` sol/xhigh |
 
 Astra only after sol xhigh failed twice on the same task (two fix rounds still missing the criteria): Hard -> `astra-hard` astra/high; Architecture or Critical -> `architect` astra/xhigh. Both implement or review per the brief (user rule 2026-11-20).
 
