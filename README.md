@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/model-routing-codex-banner.png" alt="model-routing-codex — Codex CLI subagents routed to the right GPT model" width="100%">
+  <img src="assets/model-routing-codex-banner.png" alt="model-routing-codex — Codex CLI subagents routed to the right GPT model" width="560">
 </p>
 
 # model-routing-codex
