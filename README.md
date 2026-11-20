@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/model-routing-codex-banner.png" alt="model-routing-codex — Codex CLI subagents routed to the right GPT model" width="100%">
+</p>
+
 # model-routing-codex
 
 Subagent routing rules for the OpenAI Codex CLI: send each subagent task to the right GPT model and reasoning effort, based on what the task is and how hard it is. Codex counterpart of [lsy041015/model-routing](https://github.com/lsy041015/model-routing) (Claude Code).
